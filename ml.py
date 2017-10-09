@@ -11,8 +11,8 @@ mp = mercadopago.MP("5643352584449553", "kM7TSzfwksQPaUBi22VVEa3P97D2kXNW")
 
 filters = {
         "site_id": "MLA", # Argentina: MLA; Brasil: MLB
-        "external_reference": "Bill001"
     }
+
 
 # Search payment data according to filters
 searchResult = mp.search_payment(filters)
@@ -21,12 +21,20 @@ searchResult = mp.search_payment(filters)
 output = "" 
 
 for payment in searchResult["response"]["results"]:
-        output += "<tr>"
-        output += "<td>"+payment["collection"]["id"]+"</td>\n"
-        output += "<td>"+payment["collection"]["external_reference"]+"</td>\n"
-        output += "<td>"+payment["collection"]["status"]+"</td>\n"
-        output += "</tr>"
-    	output += " "
+   output += "<tr>"
+   output += "<td>"+payment["collection"]["id"]+"</td>\n"
+   payment_id = payment["collection"]["id"]
+   output += "<td>"+payment["collection"]["external_reference"]+"</td>\n"
+   output += "<td>"+payment["collection"]["status"]+"</td>\n"
+   output += "</tr>"
+   output += " "
 
-print output
+   paymentInfo = mp.get_payment (payment_id)
+   if paymentInfo["status"] == 200:
+     print json.dumps(paymentInfo, indent=4)
+     print "Ok..."
+   else:
+     print "None!"
+
+
 print "Ok!"
