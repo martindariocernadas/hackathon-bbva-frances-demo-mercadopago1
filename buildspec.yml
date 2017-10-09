@@ -4,7 +4,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Installing Paypal-REST-SDK
+      - echo Installing MercadoPago SDK
       - pip install mercadopago
       - echo Compiling the Python code...
       - python ml.py
