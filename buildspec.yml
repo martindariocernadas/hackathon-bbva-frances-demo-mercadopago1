@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Installing Paypal-REST-SDK
+      - pip install mercadopago
+      - echo Compiling the Python code...
+      - python ml.py
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - ml.py
